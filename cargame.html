@@ -1,73 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tank và chó cheems</title>
     <style>
-        body{
+        body {
             background-color: coral;
             box-sizing: border-box;
         }
-        .carcontrol{
+
+        .carcontrol {
             background-color: blue;
             box-sizing: border-box;
             color: chocolate;
-           border-style: dashed ;
-           width: 200px;
+            border-style: dashed;
+            width: 200px;
         }
-        .cheemscontrol{
+
+        .cheemscontrol {
             margin-left: 12%;
             margin-top: -5%;
             background-color: blue;
             box-sizing: border-box;
             color: chocolate;
-           border-style:dashed ;
-           width: 200px;
+            border-style: dashed;
+            width: 200px;
         }
     </style>
 </head>
-<p>Lưu ý:được lưu tối đa năm lần thắng của mỗi đối tượng , game kĩ năng nhưng may rủi là chính , không nên đập máy khi chơi!</p>
+<p>Lưu ý:được lưu tối đa năm lần thắng của mỗi đối tượng , game kĩ năng nhưng may rủi là chính , không nên đập máy khi
+    chơi!</p>
 <p>Gợi ý : ai chạm vô bom trước thắng , ván mới bằng cách resert tap nha</p>
 <h1>Tay lái lụa và chú chó cheems</h1>
 <!-- <body style="background-color: darkcyan; background:url('roard.jpg')  ; background-position-y: -320px; background-size: 800px;"> -->
-    <body>
-        <input type="text" id="num">
-        <button onclick="them()">Lưu điểm</button>
-        <h1 id="hienThi"></h1>
+
+<body>
+    <input type="text" id="num">
+    <button onclick="them()">Lưu điểm</button>
+    <h1 id="hienThi"></h1>
     <img src="car (1).png" id="tank" alt="" style="position:absolute; top: 600px; left: 100px; width: 100px;">
     <!-- Car control -->
     <div class="carcontrol">
-    <p>Car control</p>
-    <button onclick="up()">Up</button>
-    <button onclick="down()">down</button>
-    <button onclick="left()">left</button>
-    <button onclick="right()">right</button>
-</div>
+        <p>Car control</p>
+        <button onclick="up()">Up</button>
+        <button onclick="down()">down</button>
+        <button onclick="left()">left</button>
+        <button onclick="right()">right</button>
+    </div>
     <!-- end -->
     <!-- cheems control -->
     <br>
     <div class="cheemscontrol">
-    <p>Cheems control</p>
-    <button onclick="up1()">Up</button>
-    <button onclick="down1()">down</button>
-    <button onclick="left1()">Left</button>
-    <button onclick="right1()">Right</button>
-</div>
+        <p>Cheems control</p>
+        <button onclick="up1()">Up</button>
+        <button onclick="down1()">down</button>
+        <button onclick="left1()">Left</button>
+        <button onclick="right1()">Right</button>
+    </div>
     <!-- end -->
     <img src="background-remover/5a9d1aa23ebe6955a45365ad7ec422a3[1].png " alt=""
         style="width:100px;  position:absolute; top: 500px; left: 100px;" id="dog">
     <!-- <img src="background-remover/5a9d1aa23ebe6955a45365ad7ec422a3[1].png" alt=""
         style="width:50px;  position:absolute; top: 200px; left: 700px;"> -->
 
-    <img src="background-removerboom/boom.png" alt="" style="width:100px;  position:absolute; top: 500px; left: 1800px;" id="finish">
-       <script>
+    <img src="background-removerboom/boom.png" alt="" style="width:100px;  position:absolute; top: 500px; left: 1800px;"
+        id="finish">
+    <script>
         // start
-        let a=0
-        for(let i=4;a<i;a++){
-            alert(a )   
-        }alert("Start !")
+        let a = 0
+        for (let i = 4; a < i; a++) {
+            alert(a)
+        } alert("Start !")
         // chó cheems
         window.addEventListener('keydown', (e) => {
             if (e.key == 's') {
@@ -133,6 +139,10 @@
             check()
         }
         // end
+        // check
+        let score = 0
+        let maxscore = 5
+        let maxcham =0
         function check() {
             let dichdentop = parseFloat(document.getElementById('finish').style.top)
             let dichdenleft = parseFloat(document.getElementById('finish').style.left)
@@ -143,41 +153,69 @@
             let leftdog = parseFloat(document.getElementById('dog').style.left)
             if (toptank == topdog && lefttank == leftdog) {
                 alert("kết thúc: cả 2 thua ")
-                document.getElementById('num').value="Bất ngờ chưa bà già !!!"
+                document.getElementById('num').value = "Bất ngờ chưa bà già !!!"
                 setInterval(() => {
                     document.getElementById('dog').style.left = parseFloat(document.getElementById('dog').style.left) - 50 + 'px'
                     document.getElementById('tank').style.left = parseFloat(document.getElementById('tank').style.left) - 50 + 'px'
                 }, 10);
+
             }
-            if(toptank==dichdentop&&lefttank==dichdenleft){
+            if (toptank == dichdentop && lefttank == dichdenleft) {
                 alert("Kết thúc:Xe oto thắng")
-                document.getElementById('num').value="Điểm xe "+Math.floor(Math.random() * 100);
+                document.getElementById('num').value = "Điểm xe " + Math.floor(Math.random() * 100);
                 setInterval(() => {
                     document.getElementById('dog').style.left = parseFloat(document.getElementById('dog').style.left) - 50 + 'px'
                 }, 10);
+                maxcham++
+                if(maxcham==2){
+                    alert("chỉ được chạm vô bom 1 lần thôi !")
+                    document.getElementById('num').value =' '
+
+                }
+                score++
+                if (score == maxscore) {
+                    alert(document.getElementById('num').value = "Điểm xe đã được lưu 5 lần")
+                }
+
+
             }
-            if(topdog==dichdentop&&leftdog==dichdenleft){
+            if (topdog == dichdentop && leftdog == dichdenleft) {
                 alert("Kết thúc:Chú chó cheems thắng")
-                document.getElementById('num').value="Điểm chó "+Math.floor(Math.random() * 100);
+                document.getElementById('num').value = "Điểm chó " + Math.floor(Math.random() * 100);
                 setInterval(() => {
-                document.getElementById('tank').style.left = parseFloat(document.getElementById('tank').style.left) - 50 + 'px'
-            }, 10);
+                    document.getElementById('tank').style.left = parseFloat(document.getElementById('tank').style.left) - 50 + 'px'
+                }, 10);
+                maxcham++
+                if(maxcham==2){
+                    alert("chỉ được chạm vô bom 1 lần thôi !")
+                    document.getElementById('num').value =' '
+
+                }
+                score++
+                if (score == maxscore) {
+                    alert(document.getElementById('num').value = "Điểm chó đã được lưu 5 lần")
+                }
+
             }
         }
-       let arr =[]
-        function them(){
+        // end---
+        // hệ thống lưu điểm
+        let arr = []
+        function them() {
             arr.push(document.getElementById('num').value);
-            document.getElementById('num').value=' '
-            localStorage.setItem('dulieu',arr);
+            document.getElementById('num').value = ' '
+            localStorage.setItem('dulieu', arr);
             hien()
         }
-        function hien(){
-            arr=localStorage.getItem('dulieu').split(",")
+        function hien() {
+            arr = localStorage.getItem('dulieu').split(",")
             document.getElementById('hienThi').innerHTML = arr;
         }
         hien()
+        // end---
 
 
     </script>
 </body>
+
 </html>
